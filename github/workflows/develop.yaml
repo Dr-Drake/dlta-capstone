@@ -1,0 +1,34 @@
+# Useful links
+# https://medium.com/swlh/how-to-deploy-your-application-to-digital-ocean-using-github-actions-and-save-up-on-ci-cd-costs-74b7315facc2
+# https://codememoirs.com/automatic-deployment-digitalocean-github-actions
+# https://stackoverflow.com/questions/69873818/how-to-git-pull-at-remote-server-and-then-recreate-the-env-file-using-github-act
+
+name: Deploy to AWS
+
+on:
+  # run it on push to the develop repository branch
+  push:
+    branches: [develop]
+    
+  # run it during pull request
+  pull_request:
+    branches: [develop]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Deploy to AWS EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd dlta-capstone
+            git checkout develop
+            git pull
