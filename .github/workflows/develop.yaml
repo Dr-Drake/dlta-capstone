@@ -52,5 +52,5 @@ jobs:
             DB_URI=${{ secrets.DB_URI }}
             PORT=${{ secrets.PORT }}
             EOF
-            yarn install
-            yarn reload
+            npm install
+            npm run reload
