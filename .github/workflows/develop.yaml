@@ -47,3 +47,9 @@ jobs:
             cd backend
             git checkout develop
             git pull
+            cat <<EOF > .env
+            DB_URI=${{ secrets.DB_URI }}
+            PORT=${{ secrets.PORT }}
+            EOF
+            yarn install
+            yarn reload
