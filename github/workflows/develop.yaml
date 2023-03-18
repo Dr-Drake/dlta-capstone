@@ -32,5 +32,3 @@ jobs:
             cd dlta-capstone
             git checkout develop
             git pull
-            yarn install
-            pm2 restart app.js
