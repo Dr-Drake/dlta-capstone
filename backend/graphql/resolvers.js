@@ -1,5 +1,6 @@
 import Profile from "../models/profile.js";
 import Client from "../models/client.js";
+import bcryprt from "bcryptjs";
 import { ObjectId } from "bson";
 
 const resolvers = {
@@ -20,12 +21,27 @@ const resolvers = {
     },
     client: async (_, { email }) => {
       const client = await Client.find({ email: email });
+      if (client.length === 0) {
+        throw new Error("Client with that email  doesn't exist");
+      }
       return { client, message: "Client was fetched successfully" };
+    },
+    clientExists: async (parent, { email }) => {
+      const userByEmail = await Client.find({ email: email });
+      return userByEmail;
     },
   },
   Mutation: {
-    addClient: async (_, { client }) => {
-      const addedClient = await Client.create(client);
+    addClient: async (parent, args) => {
+      const {
+        input: { email, password },
+      } = args;
+      const passwordHash = await bcryprt.hash(password, 12);
+      const clientExists = await context.dataSources.userAPI.clientExists(email);
+      if (clientExists) {
+        throw new Error("Client with that email  already Exist");
+      }
+      const addedClient = await Client.create({ email, passwordHash });
       return {
         client: addedClient,
         message: "Client was added successfully",

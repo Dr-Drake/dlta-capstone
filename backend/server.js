@@ -21,7 +21,7 @@ const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler(); //part of next config
 
 const db_uri = process.env.DB_URI;
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 mongoose.connect(
   db_uri,
