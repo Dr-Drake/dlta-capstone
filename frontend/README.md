@@ -1,2 +1,0 @@
-# Frontend 
-Just a placeholder.

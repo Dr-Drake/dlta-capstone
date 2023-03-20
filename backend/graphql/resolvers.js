@@ -1,46 +1,35 @@
-import Country from "../models/country.js";
+import Profile from "../models/profile.js";
+import Client from "../models/client.js";
 import { ObjectId } from "bson";
 
 const resolvers = {
   Query: {
-    countries: async () => {
-      const countries = await Country.find();
-      const count = countries.length;
+    profiles: async () => {
+      const profiles = await Profile.find();
+      const count = profiles.length;
 
       return {
-        data: countries,
+        data: profiles,
         count,
-        message: "Countries fetched successfully",
+        message: "Profiles fetched successfully",
       };
     },
-    country: async (_, { id }) => {
-      const country = await Country.findById(id);
-      return { country, message: "Country was fetched successfully" };
+    profile: async (_, { id }) => {
+      const profile = await Profile.findById(id);
+      return { profile, message: "Profile was fetched successfully" };
+    },
+    client: async (_, { email }) => {
+      const client = await Client.find({ email: email });
+      return { client, message: "Client was fetched successfully" };
     },
   },
   Mutation: {
-    addCountry: async (_, { country }) => {
-      const addedCountry = await Country.create(country);
+    addClient: async (_, { client }) => {
+      const addedClient = await Client.create(client);
       return {
-        country: addedCountry,
-        message: "Country was added successfully",
+        client: addedClient,
+        message: "Client was added successfully",
       };
-    },
-    updateCountry: async (_, { country }) => {
-      const countryId = country.id;
-      delete country.id;
-      const updatedCountry = await Country.findByIdAndUpdate(
-        { _id: ObjectId(countryId) },
-        country
-      );
-      return {
-        country: updatedCountry,
-        message: "Country was updated successfully",
-      };
-    },
-    deleteCountry: async (_, { id }) => {
-      const country = await Country.findByIdAndDelete(id);
-      return { country, message: "Country was  deleted successfully" };
     },
   },
 };
