@@ -27,7 +27,20 @@ const resolvers = {
       return { client, message: "Client was fetched successfully" };
     },
     clientExists: async (parent, { email }) => {
+      // Query the database to check if a client with the provided email exists
       const userByEmail = await Client.find({ email: email });
+
+      if (!userByEmail) {
+        // If a client with the provided email doesn't exist, return an error message
+        throw new Error("Client not found");
+      }
+
+      // Compare the provided password with the user's hashed password
+      if (!bcryprt.compareSync(password, user.password)) {
+        // If the passwords don't match, return an error message
+        throw new Error("Invalid password");
+      }
+
       return userByEmail;
     },
   },
@@ -37,7 +50,9 @@ const resolvers = {
         input: { email, password },
       } = args;
       const passwordHash = await bcryprt.hash(password, 12);
-      const clientExists = await context.dataSources.userAPI.clientExists(email);
+      const clientExists = await context.dataSources.userAPI.clientExists(
+        email
+      );
       if (clientExists) {
         throw new Error("Client with that email  already Exist");
       }
