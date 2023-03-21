@@ -1,7 +1,7 @@
 import Profile from "../models/profile.js";
 import Client from "../models/client.js";
 import bcryprt from "bcryptjs";
-import { ObjectId } from "bson";
+
 
 const resolvers = {
   Query: {
@@ -19,23 +19,28 @@ const resolvers = {
       const profile = await Profile.findById(id);
       return { profile, message: "Profile was fetched successfully" };
     },
-    client: async (_, { email, password }) => {
-      const client = await Client.find({ email: email });
-      if (client.length === 0) {
+    client: async (_, { client }) => {
+      const clientRetrieved = await Client.findOne({ email: client.email });
+      if (!clientRetrieved) {
         throw new Error("Client with that email  doesn't exist");
       }
+      console.log(client.password)
+      console.log(clientRetrieved)
+      console.log(clientRetrieved.password)
       // Compare the provided password with the user's hashed password
-      if (!bcryprt.compareSync(password, client.password)) {
+      if (!bcryprt.compareSync(client.password, clientRetrieved.password)) {
         // If the passwords don't match, return an error message
         throw new Error("Invalid password");
       }
-      return { client, message: "Client was fetched successfully" };
+      return { client: clientRetrieved, message: "Client was fetched successfully" };
     },
   },
   Mutation: {
     addClient: async (_, { client }) => {
+     
       const userExist = await Client.find({ email: client.email });
-      if (userExist) {
+     
+      if (userExist.length != 0) {
         throw new Error("Client with that email  already Exist");
       }
       const passwordHash = await bcryprt.hash(client.password, 12);

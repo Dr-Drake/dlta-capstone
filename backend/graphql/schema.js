@@ -3,7 +3,7 @@ const typeDefs = gql`
   type Query {
     profiles: ProfileList!
     profile(id: ID!): ProfileOutput!
-    client(email: String!): ClientOutput!
+    client(client: ClientInput): ClientOutput!
   }
   type Mutation {
     addClient(client: ClientInput): ClientOutput!

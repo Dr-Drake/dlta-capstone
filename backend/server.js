@@ -13,6 +13,7 @@ import typeDefs from "./graphql/schema.js";
 import resolvers from "./graphql/resolvers.js";
 import next from "next";
 import Profile from "./models/profile.js";
+import  {profilesData} from "./data/profiles.js"
 
 const app = express();
 
@@ -37,11 +38,11 @@ mongoose.connect(
 );
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "database connection timed out"));
-const seedData = [];
+
 
 const seedDb = async () => {
   await Profile.deleteMany({});
-  await Profile.insertMany(seedData);
+  await Profile.insertMany(profilesData);
 };
 
 seedDb().then(() => {
