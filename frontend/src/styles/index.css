@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .skeleton {
+      @apply animate-pulse bg-slate-200
+    }
+}
