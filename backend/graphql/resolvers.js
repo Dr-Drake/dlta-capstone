@@ -24,9 +24,7 @@ const resolvers = {
       if (!clientRetrieved) {
         throw new Error("Client with that email  doesn't exist");
       }
-      console.log(client.password)
-      console.log(clientRetrieved)
-      console.log(clientRetrieved.password)
+     
       // Compare the provided password with the user's hashed password
       if (!bcryprt.compareSync(client.password, clientRetrieved.password)) {
         // If the passwords don't match, return an error message

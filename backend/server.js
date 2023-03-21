@@ -12,8 +12,7 @@ import http from "http";
 import typeDefs from "./graphql/schema.js";
 import resolvers from "./graphql/resolvers.js";
 import next from "next";
-import Profile from "./models/profile.js";
-import  {profilesData} from "./data/profiles.js"
+
 
 const app = express();
 
@@ -40,14 +39,7 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "database connection timed out"));
 
 
-const seedDb = async () => {
-  await Profile.deleteMany({});
-  await Profile.insertMany(profilesData);
-};
 
-seedDb().then(() => {
-  console.log("seed data was added successfully");
-});
 
 async function startApolloServer({ typeDefs, resolvers }) {
   const httpServer = http.createServer(app);
