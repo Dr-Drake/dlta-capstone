@@ -23,6 +23,7 @@
     "@babel/node": "^7.20.2",
     "apollo-server-core": "^3.11.1",
     "apollo-server-express": "^3.11.1",
+    "bcryptjs": "^2.4.3",
     "bson": "^4.7.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

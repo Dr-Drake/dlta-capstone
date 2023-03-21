@@ -1,42 +1,53 @@
 import { gql } from "apollo-server-express";
 const typeDefs = gql`
   type Query {
-    countries: CountryList!
-    country(id: ID!): CountryOutput!
+    profiles: ProfileList!
+    profile(id: ID!): ProfileOutput!
+    client(client: ClientInput): ClientOutput!
   }
   type Mutation {
-    addCountry(country: CountryInput): CountryOutput!
-    updateCountry(country: CountryUpdate): CountryOutput!
-    deleteCountry(id: ID!): CountryOutput!
+    addClient(client: ClientInput): ClientOutput!
   }
-  type CountryList {
-    data: [Country]!
+  type ProfileList {
+    data: [Profile]!
     count: Int!
     message: String
   }
-  type Country {
+  type Profile {
     id: ID!
-    area: Int!
-    country: String!
-    totalPopulation: Int!
-    year: String!
+    name: String!
+    picture: String!
+    role: String!
+    bio: String!
+    location: String!
+    projects: [Project]!
   }
-  type CountryOutput {
-    country: Country
+
+  type Project {
+    id: ID!
+    projectName: String!
+    youtube: String!
+    github: String!
+    description: String!
+    technologies: [String]!
+  }
+
+  type Client {
+    id: ID!
+    email: String!
+    password: String!
+  }
+  type ProfileOutput {
+    profile: Profile
     message: String
   }
-  input CountryInput {
-    area: Int!
-    country: String!
-    totalPopulation: Int!
-    year: String!
+  type ClientOutput {
+    client: Client
+    message: String
   }
-  input CountryUpdate {
-    id: ID!
-    area: Int!
-    country: String!
-    totalPopulation: Int!
-    year: String!
+  input ClientInput {
+    email: String!
+    password: String!
   }
 `;
 export default typeDefs;
