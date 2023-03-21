@@ -1,0 +1,22 @@
+{
+  "name": "dlta-capstone",
+  "version": "1.0.0",
+  "description": "DLTA Capstone project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mugishasam123/dlta-capstone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mugishasam123/dlta-capstone/issues"
+  },
+  "homepage": "https://github.com/mugishasam123/dlta-capstone#readme",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
+}
