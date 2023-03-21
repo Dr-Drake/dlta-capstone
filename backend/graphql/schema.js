@@ -49,8 +49,5 @@ const typeDefs = gql`
     email: String!
     password: String!
   }
-  type Query {
-    clientExists(password: String!, email: String!): String!
-  }
 `;
 export default typeDefs;
