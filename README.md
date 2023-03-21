@@ -1,2 +1,2 @@
 # dlta-capstone
-DLTA Capstone project.
+dlta-capstone
