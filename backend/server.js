@@ -19,7 +19,7 @@ const app = express();
 
 
 const db_uri = process.env.DB_URI;
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 mongoose.connect(
   db_uri,
