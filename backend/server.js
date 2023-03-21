@@ -16,9 +16,7 @@ import next from "next";
 
 const app = express();
 
-const dev = process.env.NODE_ENV !== "production"; //true false
-const nextApp = next({ dev });
-const handle = nextApp.getRequestHandler(); //part of next config
+
 
 const db_uri = process.env.DB_URI;
 const port = process.env.PORT;
@@ -64,7 +62,6 @@ async function startApolloServer({ typeDefs, resolvers }) {
       return next();
     }
 
-    return handle(req, res); // for all the routes outside express
   });
 
   await server.start();
