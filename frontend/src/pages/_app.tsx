@@ -1,5 +1,6 @@
 import '@/styles/globals.css'
 import '@/styles/index.css'
+import 'flowbite'
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react';
 
