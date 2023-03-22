@@ -6,7 +6,7 @@ import CustomButton from "./CustomButton";
 const ProfileCard: React.FC<any> = ()=>{
 
     return(
-        <div className="border rounded-lg border-borderGray p-3">
+        <div className="border rounded-lg border-borderGray p-3 w-full lg:w-[350px]">
 
             {/** Top Section */}
             <div className="flex items-center justify-between">

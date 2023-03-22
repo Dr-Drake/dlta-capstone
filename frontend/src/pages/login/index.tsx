@@ -7,12 +7,31 @@ import { SiGoogle, SiFacebook, SiGithub } from "react-icons/si";
 import OAuthButton from '@/components/OAuthButton';
 import CustomButton from '@/components/CustomButton';
 import SignInForm from '@/forms/SignInForm';
+import { useRouter } from 'next/router';
 
 export interface SignInPageProps{
     providers?: Record<any, any>;
 }
 
 const SignInPage: NextPage<SignInPageProps> = ({ providers })=>{
+
+    // alert(process.env.NEXT_PUBLIC_GOOGLE_SECRET)
+
+    // Hooks
+    const router = useRouter();
+
+    const handleSignIn = async () => {
+        //e.preventDefault();
+        await signIn('google');
+    };
+
+    const handleGithubSignIn = async ()=>{
+        await signIn('github');
+    }
+
+    const gotoSignUp = ()=>{
+        router.push('/register')
+    }
 
     return (
         <AuthLayout>
@@ -31,6 +50,7 @@ const SignInPage: NextPage<SignInPageProps> = ({ providers })=>{
                         label='GitHub'
                         icon={<SiGithub color='white'/>}
                         className="flex-1 sm:w-max"
+                        onClick={handleGithubSignIn}
                     />
                     <OAuthButton
                         label='Facebook'
@@ -41,6 +61,7 @@ const SignInPage: NextPage<SignInPageProps> = ({ providers })=>{
                         label='Google'
                         icon={<SiGoogle color='white'/>}
                         className="flex-1 sm:w-max"
+                        onClick={handleSignIn}
                     />
                 </div>
 
@@ -57,7 +78,9 @@ const SignInPage: NextPage<SignInPageProps> = ({ providers })=>{
                 {/** Need an Account? */}
                 <div className='flex items-center mt-[30px] text-white justify-center'>
                     <p className='text-sm mr-3'>Need an Account?</p>
-                    <CustomButton variant='outlined' className='text-sm'>
+                    <CustomButton variant='outlined' className='text-sm'
+                        onClick={gotoSignUp}
+                    >
                         SIGN UP
                     </CustomButton>
                 </div>
@@ -73,6 +96,7 @@ export const getServerSideProps: GetServerSideProps = async (context)=> {
 
     let providers = await getProviders();
     console.log(providers);
+    console.log("NEXTAUTH_URL: ", process.env.NEXTAUTH_URL);
     return {
         props: {
             providers
