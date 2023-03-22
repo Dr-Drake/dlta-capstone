@@ -31,6 +31,6 @@ const CustomButton = React.forwardRef<HTMLButtonElement,CustomButtonProps>(({
     )
 }) 
 
-
+CustomButton.displayName = 'CustomButton';
 
 export default CustomButton;

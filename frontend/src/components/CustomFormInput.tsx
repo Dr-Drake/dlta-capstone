@@ -50,6 +50,6 @@ const CustomFormTextInput = React.forwardRef<HTMLInputElement,CustomFormTextInpu
     )
 }) 
 
-
+CustomFormTextInput.displayName = 'CustomFormTextInput';
 
 export default CustomFormTextInput;

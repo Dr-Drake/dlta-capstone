@@ -1,13 +1,20 @@
 import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: AuthOptions = {
   // Configure one or more authentication providers
+  secret: process.env.NextAuth_SECRET,
   providers: [
     GoogleProvider({
-        clientId: process.env.NEXT_PUBLIC_GOOGLE_ID || '',
-        clientSecret: process.env.NEXT_PUBLIC_GOOGLE_SECRET || '',
+      clientId: process.env.NEXT_PUBLIC_GOOGLE_ID || '',
+      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_SECRET || '',
+    }),
+
+    GitHubProvider({
+      clientId: process.env.NEXT_PUBLIC_GITHUB_ID || '',
+      clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET || '',
     }),
 
     CredentialsProvider({
@@ -41,6 +48,21 @@ export const authOptions: AuthOptions = {
       })
     // ...add more providers here
   ],
+
+  callbacks: {
+    // signIn: (user, account, profile)=> {
+    //   // Do something when the user signs in
+    //   return true;
+    // },
+    // async redirect(url, baseUrl) {
+    //   // Do something when the user is redirected after signing in
+    //   return url.startsWith(baseUrl) ? url : baseUrl;
+    // },
+  },
+
+  // pages:{
+  //   signIn: '/login'
+  // }
 }
 
 export default NextAuth(authOptions)
