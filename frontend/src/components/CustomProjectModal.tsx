@@ -41,7 +41,7 @@ class CustomProjectModal extends Component<CustomProjectModalProps, CustomProjec
         const options: ModalOptions = {
             placement: 'center',
             backdrop: 'dynamic',
-            backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
+            backdropClasses: 'bg-gray-900 bg-opacity-70 dark:bg-opacity-80 fixed inset-0 z-40',
             closable: true,
             onHide: () => {
                 console.log('modal is hidden');
@@ -120,7 +120,7 @@ class CustomProjectModal extends Component<CustomProjectModalProps, CustomProjec
                                 }
                             </div>
                         </div>
-                        <div className="px-5 sm:px-10">
+                        <div className="px-5 pb-5 sm:px-10">
                             <p>{ project?.projectName } presented by { name }</p>
 
                             {/** GitHub Link */}

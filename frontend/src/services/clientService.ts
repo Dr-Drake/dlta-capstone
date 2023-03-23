@@ -51,7 +51,6 @@ export async function createClient(clientInput: ClientInput) {
         mutation AddClient($client: ClientInput) {
             addClient(client: $client) {
                 client {
-                    id
                     email
                     password
                 }

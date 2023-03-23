@@ -10,18 +10,27 @@ import ProjectCard from '@/components/ProjectCard';
 import { useRouter } from 'next/router';
 import { useSingleProfile } from '@/hooks/useSingleProfile';
 import CustomSkeleton from '@/components/CustomSkeleton';
+import CustomButton from '@/components/CustomButton';
 
 
 const ProfilPage: NextPage<any> = ({  })=>{
 
     // Hooks
-    const router = useRouter()
+    const router = useRouter();
+
+    // State
+    const [isViewMore, setViewMore] = React.useState<boolean>(false);
 
     // Profile ID
     const { id } = router.query
 
     // Fetched and Cached data
     const { data, isLoading, error, refetch} = useSingleProfile(id as string);
+
+    // Handlers
+    const handleViewMore = ()=>{
+        setViewMore(true);
+    }
 
     // Effects
     React.useEffect(()=>{
@@ -86,6 +95,16 @@ const ProfilPage: NextPage<any> = ({  })=>{
                     }
                     {/** Actual Data */}
                     {
+                        !isViewMore &&
+                        data?.profile.projects?.slice(0,6).map((p, i)=>(
+                            <ProjectCard 
+                                key={p.id}
+                                {...p}
+                            />
+                        ))
+                    }
+                    {
+                        isViewMore &&
                         data?.profile.projects?.map((p, i)=>(
                             <ProjectCard 
                                 key={p.id}
@@ -94,6 +113,16 @@ const ProfilPage: NextPage<any> = ({  })=>{
                         ))
                     }
                 </div>
+                {
+                    !isViewMore &&
+                    <div className='mt-[30px]'>
+                        <CustomButton className='block mx-[auto] !rounded-xl'
+                            onClick={handleViewMore}
+                        >
+                            View More
+                        </CustomButton>
+                    </div>
+                }
             </div>
         </MainLayout>
     )

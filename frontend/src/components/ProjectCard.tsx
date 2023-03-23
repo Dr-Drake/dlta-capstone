@@ -34,7 +34,7 @@ const ProjectCard: React.FC<ProjectCardProps> = (props)=>{
                 name={name}
                 project={props}
             />
-            <div className="border rounded-xl border-borderGray p-4 w-full lg:w-[390px] flex flex-col">
+            <div className="item border rounded-xl border-borderGray p-4 w-full lg:w-[390px] flex flex-col">
 
                 {/** Top Section */}
                 <div className="flex items-center gap-5">

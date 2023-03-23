@@ -8,13 +8,53 @@ import SearchBar from './SearchBar';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GrClose } from "react-icons/gr";
 import { signOut } from "next-auth/react";
+import { Drawer } from 'flowbite';
+import { useProfiles } from '@/hooks/useProfiles';
+import { Profile } from '@/types/Profile';
+import { SearchContext } from '@/contexts/SearchContext';
+import { useRouter } from 'next/router';
 
 const Navbar: React.FC<any> = ({ children })=>{
+
+    // Ref
+    const drawerRef = React.createRef<HTMLDivElement>();
+
+    // Fetched and Cached data
+    const { data, isLoading, error, refetch} = useProfiles();
+
+    // Hooks
+    const router = useRouter();
+
+    // Contexts
+    const { setProfiles } = React.useContext(SearchContext)
+
+    // Variables
+    let drawer: Drawer | null = null;
+    const hiddenClass = "hidden";
+    const searchbarClasses = "hidden lg:flex";
 
     // Handlers
     const handleLogout = async ()=>{
         await signOut({ callbackUrl: '/login' })
     }
+
+    const toggleDrawer = ()=>{
+        drawer?.toggle();
+    }
+
+    const handleSearchChange: React.ChangeEventHandler<HTMLInputElement> = (e)=>{
+
+        let searchTerm = e.target.value.toLowerCase();
+
+        let filteredData = data?.data.filter((p)=>{
+            if (p.name.toLowerCase().includes(searchTerm) || p.role.toLowerCase().includes(searchTerm)) {
+                return p;
+            }
+        })
+
+        setProfiles(filteredData || []);
+    }
+
 
     // Elements
     const drawerLogoLink = (
@@ -35,6 +75,7 @@ const Navbar: React.FC<any> = ({ children })=>{
 
     const mobileDrawer = (
         <div 
+            ref={drawerRef}
             id="hamburger" 
             className="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-80 dark:bg-gray-800" tabIndex={-1} aria-labelledby="drawer-label"
         >
@@ -54,6 +95,14 @@ const Navbar: React.FC<any> = ({ children })=>{
         </div>
     )
 
+
+    // Effects
+    React.useEffect(()=>{
+        if (drawerRef.current) {
+            drawer = new Drawer(drawerRef.current)
+        }
+    },[drawerRef])
+
     return(
         <>
         { mobileDrawer }
@@ -72,13 +121,16 @@ const Navbar: React.FC<any> = ({ children })=>{
             </div>
 
             {/** Middle Spacer */}
-            <div className='flex-1 flex justify-center'>
-                <SearchBar containerClass='hidden lg:flex'/>
+            <div className='flex-1 flex justify-center pr-5'>
+                <SearchBar 
+                    containerClass={router.pathname === '/[id]' ? hiddenClass : searchbarClasses}
+                    onChange={handleSearchChange}
+                />
             </div>
 
             {/** Actions */}
             <div className='hidden lg:flex items-center justify-end gap-[50px]'>
-                <Image src={bellLogo} alt="dlta profiles logo" className='w-[30px]'/>
+                {/* <Image src={bellLogo} alt="dlta profiles logo" className='w-[30px]'/> */}
                 <ProfileDropdown onLogout={handleLogout}/>
             </div>
 
@@ -89,6 +141,7 @@ const Navbar: React.FC<any> = ({ children })=>{
                 data-drawer-show="hamburger" 
                 aria-controls="hamburger"
                 className='block lg:hidden'
+                onClick={toggleDrawer}
             >
                 <GiHamburgerMenu size={25}/>
             </button>
