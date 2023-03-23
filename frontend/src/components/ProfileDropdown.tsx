@@ -2,7 +2,11 @@ import React from "react";
 import Image from "next/image";
 import profileLogo from "@/assets/profile.svg";
 
-const ProfileDropdown: React.FC<any> = ()=>{
+export interface ProfileDropdownProps{
+    onLogout?: ()=> void;
+}
+
+const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ onLogout })=>{
 
     return(
        <React.Fragment>
@@ -11,7 +15,7 @@ const ProfileDropdown: React.FC<any> = ()=>{
             </button>
             <div id="dropdown" className="z-10 hidden bg-slate-100 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                    <li>
+                    <li onClick={onLogout}>
                         <p className="block px-4 py-2 hover:bg-buttonBlue dark:hover:bg-gray-600 dark:hover:text-white hover:text-white cursor-pointer">
                             Logout
                         </p>

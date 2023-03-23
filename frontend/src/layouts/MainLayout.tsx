@@ -8,7 +8,7 @@ const MainLayout: React.FC<any> = ({ children })=>{
             <Navbar/>
 
             {/** Main Content */}
-            <div className='flex-1 bg-white'>
+            <div className='flex-1 bg-white relative'>
                 { children }
             </div>
         </div>
