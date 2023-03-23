@@ -9,7 +9,7 @@ import { SearchContextProvider } from '@/contexts/SearchContext';
 
 export default function App({ Component, pageProps }: AppProps) {
   return(
-    <SessionProvider session={pageProps.session} basePath="http://localhost:3004/api/auth">
+    <SessionProvider session={pageProps.session} basePath={process.env.NEXTAUTH_URL}>
       <ApolloProvider client={apolloClient}>
        <SearchContextProvider>
         <Component {...pageProps} />
