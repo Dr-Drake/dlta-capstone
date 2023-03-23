@@ -16,7 +16,7 @@ const CustomFormTextInput = React.forwardRef<HTMLInputElement,CustomFormTextInpu
     const [isError, setIsError] = React.useState<boolean>(false);
 
     // Classes
-    let inputClasses = 'border rounded-lg border-white bg-transparent text-base w-full p-3 outline-none';
+    let inputClasses = 'text-white border rounded-lg border-white bg-transparent text-base w-full p-3 outline-none';
     let errorClasses = 'border-red-600';
 
     // Effect

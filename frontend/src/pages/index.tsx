@@ -4,6 +4,8 @@ import MainLayout from '@/layouts/MainLayout';
 import ProfileCard from '@/components/ProfileCard';
 import { withServerSideAuthentication } from '@/utils/authenticationUtils';
 import { useProfiles } from '@/hooks/useProfiles';
+import { SearchContext } from '@/contexts/SearchContext';
+import SearchBar from '@/components/SearchBar';
 
 export interface HomePageProps{
     providers?: Record<any, any>;
@@ -14,8 +16,40 @@ const HomePage: NextPage<any> = ({  })=>{
     // Fetched and Cached data
     const { data, isLoading, error, refetch} = useProfiles();
 
+    // Contexts
+    const { profiles, setProfiles } = React.useContext(SearchContext);
+
+    // Handlers
+    const handleSearchChange: React.ChangeEventHandler<HTMLInputElement> = (e)=>{
+
+        let searchTerm = e.target.value.toLowerCase();
+
+        let filteredData = data?.data.filter((p)=>{
+            if (p.name.toLowerCase().includes(searchTerm) || p.role.toLowerCase().includes(searchTerm)) {
+                return p;
+            }
+        })
+
+        setProfiles(filteredData || []);
+    }
+
+    // Effect
+    React.useEffect(()=>{
+        if (data) {
+            setProfiles(data.data);
+        }
+    },[data])
+
     return (
         <MainLayout>
+
+            {/** Mobile Search Bar */}
+            <div className="flex justify-center">
+                <SearchBar 
+                    containerClass='flex lg:hidden'
+                    onChange={handleSearchChange}
+                />
+            </div>
            <div className='px-[5%]'>
 
                 {/** Title */}
@@ -28,7 +62,7 @@ const HomePage: NextPage<any> = ({  })=>{
 
                 {/** Grid Label */}
                 <p className='text-xl mt-[5%]'>List of all Devs</p>
-                <p className='text-base text-borderGray'>Showing { data?.count || 0 } results</p>
+                <p className='text-base text-borderGray'>Showing { profiles.length || 0 } results</p>
 
                 <div className='py-[5%] px-[3%] sm:px-[7%] sm:py-[3%] grid gap-[20px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
 
@@ -44,7 +78,7 @@ const HomePage: NextPage<any> = ({  })=>{
 
                     {/** Actual Data */}
                     {
-                        data?.data.map((p, i)=>(
+                        profiles.map((p, i)=>(
                             <ProfileCard key={p.id} {...p}/>
                         ))
                     }

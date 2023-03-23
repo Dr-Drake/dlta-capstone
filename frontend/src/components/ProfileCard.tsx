@@ -20,7 +20,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
     }
 
     return(
-        <div className="border rounded-xl border-borderGray p-3 w-full lg:w-[360px] flex sm:flex-col">
+        <div className="border rounded-xl border-borderGray px-3 py-5 w-full lg:w-[360px] flex sm:flex-col">
 
             {/** Top Section */}
             <div className="flex items-center gap-2">
