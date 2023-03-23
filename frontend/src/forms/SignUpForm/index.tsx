@@ -3,6 +3,7 @@ import { Formik } from 'formik';
 import { SignUpFormSchema, SignUpFormState } from './schema';
 import CustomFormTextInput from '../../components/CustomFormInput';
 import { Client } from '@/types/Client';
+import CustomButton from '@/components/CustomButton';
 
 
 export interface SignUpFormProps{
@@ -58,15 +59,16 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onFormSubmit, loading, data })=
                 />
 
                 <div className='flex mt-[10%]'>
-                    <button className="bg-buttonBlue text-white font-bold py-3 px-8 w-full rounded"
+                   <CustomButton className="font-bold sm:py-3 px-8 w-full rounded"
                         onClick={()=>{
                             props.handleSubmit();
                             setSubmitted(true)
                         }}
                         disabled={loading}
+                        loading={loading}
                     >
                         COMPLETE THE SIGN UP
-                    </button>
+                    </CustomButton>
                 </div>
             </form>
             }

@@ -27,3 +27,30 @@ export function withServerSideAuthentication(gssp: GetServerSideProps) {
 
     return customGsspCallback;
 }
+
+export function withServerSideAuthPageProtection(gssp: GetServerSideProps) {
+    
+    let customGsspCallback: GetServerSideProps = async(context)=>{
+        const session = await getServerSession(context.req, context.res, {});
+
+        if (session) {
+            return {
+                redirect: {
+                    destination: '/',
+                    permanent: false,
+                },
+            };
+        }
+
+        const gsspData: any = await gssp(context)
+
+        return {
+            props: {
+                ...gsspData?.props,
+                session
+            }
+        };
+    }
+
+    return customGsspCallback;
+}

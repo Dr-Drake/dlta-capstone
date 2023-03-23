@@ -3,6 +3,7 @@ import { Formik } from 'formik';
 import { SignInFormSchema, SignInFormState } from './schema';
 import CustomFormTextInput from '../../components/CustomFormInput';
 import { Client } from '@/types/Client';
+import CustomButton from '@/components/CustomButton';
 
 
 export interface SignInFormProps{
@@ -39,8 +40,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onFormSubmit, loading, data })=
                     label='Email'
                     placeholder='your@email.com'
                     error={!!props.errors.email && submitted}
-                    // errorMessage={props.errors.email}
-                    errorMessage='Required'
+                    errorMessage={props.errors.email}
                     onChange={props.handleChange('email')}
                     value={props.values.email}
                     containerClass="mb-6"
@@ -58,15 +58,16 @@ const SignInForm: React.FC<SignInFormProps> = ({ onFormSubmit, loading, data })=
                 />
 
                 <div className='flex mt-[10%]'>
-                    <button className="bg-buttonBlue text-white font-bold py-3 px-8 w-full rounded"
+                    <CustomButton className="font-bold sm:py-3 px-8 w-full rounded"
                         onClick={()=>{
                             props.handleSubmit();
                             setSubmitted(true)
                         }}
                         disabled={loading}
+                        loading={loading}
                     >
                         SIGN IN
-                    </button>
+                    </CustomButton>
                 </div>
             </form>
             }

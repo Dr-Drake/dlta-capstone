@@ -7,8 +7,14 @@ import ProfileDropdown from './ProfileDropdown';
 import SearchBar from './SearchBar';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GrClose } from "react-icons/gr";
+import { signOut } from "next-auth/react";
 
 const Navbar: React.FC<any> = ({ children })=>{
+
+    // Handlers
+    const handleLogout = async ()=>{
+        await signOut({ callbackUrl: '/login' })
+    }
 
     // Elements
     const drawerLogoLink = (
@@ -38,7 +44,7 @@ const Navbar: React.FC<any> = ({ children })=>{
             </div>
             <div className="py-4 overflow-y-auto">
                 <ul className="space-y-2">
-                    <li>
+                    <li onClick={handleLogout}>
                         <p className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-buttonBlue dark:hover:bg-gray-700 hover:text-white cursor-pointer">
                             <span>Logout</span>
                         </p>
@@ -73,7 +79,7 @@ const Navbar: React.FC<any> = ({ children })=>{
             {/** Actions */}
             <div className='hidden lg:flex items-center justify-end gap-[50px]'>
                 <Image src={bellLogo} alt="dlta profiles logo" className='w-[30px]'/>
-                <ProfileDropdown/>
+                <ProfileDropdown onLogout={handleLogout}/>
             </div>
 
             {/** Hamburger Menu */}
