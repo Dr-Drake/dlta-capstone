@@ -15,7 +15,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
     let defaultContainerClasses = "flex items-center border rounded-lg px-3 w-[70%]"
 
     return(
-        <div className={`${defaultContainerClasses} ${containerClass}`}>
+        <div className={`${defaultContainerClasses} ${containerClass}`}
+            data-testid="search-profiles"
+        >
             <input 
                 className={`${defaultClasses} ${className}`}
                 {...props}

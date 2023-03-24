@@ -11,8 +11,8 @@ export function withServerSideAuthentication(gssp: GetServerSideProps) {
                 redirect: {
                     destination: '/login',
                     permanent: false,
-                },
-            };
+                }
+            }
         }
 
         const gsspData: any = await gssp(context)
@@ -38,8 +38,8 @@ export function withServerSideAuthPageProtection(gssp: GetServerSideProps) {
                 redirect: {
                     destination: '/',
                     permanent: false,
-                },
-            };
+                }
+            }
         }
 
         const gsspData: any = await gssp(context)

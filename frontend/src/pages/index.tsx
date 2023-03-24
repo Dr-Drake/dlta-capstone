@@ -54,7 +54,7 @@ const HomePage: NextPage<any> = ({  })=>{
 
                 {/** Title */}
                 <div className='text-[28px] md:text-[35px] lg:text-[50px] text-center mt-5'>
-                    <h1>
+                    <h1 data-testid="page-title">
                         Welcome to DLTA Profiles 
                     </h1>
                     <h1 className='lg:leading-8 text-buttonBlue'>The home of Elites.</h1>     
@@ -89,12 +89,12 @@ const HomePage: NextPage<any> = ({  })=>{
     )
 }
 
-export const getServerSideProps: GetServerSideProps = withServerSideAuthentication(async (context)=>{
-    return{
-        props:{
+// export const getServerSideProps: GetServerSideProps = withServerSideAuthentication(async (context)=>{
+//     return{
+//         props:{
 
-        }
-    }
-})
+//         }
+//     }
+// })
 
 export default HomePage;
