@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "server": "nodemon -- exec babel-node server.js",
-    "reload": "pm2 reload server --update-env"
+    "reload": "pm2 reload server --update-env",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
