@@ -89,12 +89,12 @@ const HomePage: NextPage<any> = ({  })=>{
     )
 }
 
-// export const getServerSideProps: GetServerSideProps = withServerSideAuthentication(async (context)=>{
-//     return{
-//         props:{
+export const getServerSideProps: GetServerSideProps = withServerSideAuthentication(async (context)=>{
+    return{
+        props:{
 
-//         }
-//     }
-// })
+        }
+    }
+})
 
 export default HomePage;
