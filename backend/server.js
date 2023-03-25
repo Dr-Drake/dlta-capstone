@@ -11,7 +11,7 @@ import {
 import http from "http";
 import typeDefs from "./graphql/schema.js";
 import resolvers from "./graphql/resolvers.js";
-import next from "next";
+
 
 
 const app = express();

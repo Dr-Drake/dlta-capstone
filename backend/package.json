@@ -1,35 +1,40 @@
 {
-  "name": "countries",
+  "name": "dlta-capstone",
   "version": "1.0.0",
-  "description": "This app manages countries statistics information",
+  "description": "DLTA Capstone project.",
   "main": "server.js",
   "type": "module",
   "scripts": {
     "server": "nodemon -- exec babel-node server.js",
     "reload": "pm2 reload server --update-env",
+    "test": "jest",
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mugishasam123/countries.git"
+    "url": "git+https://github.com/mugishasam123/dlta-capstone.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mugishasam123/countries/issues"
+    "url": "https://github.com/mugishasam123/dlta-capstone/issues"
   },
-  "homepage": "https://github.com/mugishasam123/countries#readme",
+  "homepage": "https://github.com/mugishasam123/dlta-capstone#readme",
   "dependencies": {
+    "@apollo/server": "^4.5.0",
     "@babel/node": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
     "apollo-server-core": "^3.11.1",
     "apollo-server-express": "^3.11.1",
     "bcryptjs": "^2.4.3",
     "bson": "^4.7.0",
+    "chai": "^4.3.7",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "graphql": "^16.6.0",
+    "jest": "^29.5.0",
     "mongoose": "^6.7.1",
     "next": "^13.0.2"
   },
