@@ -7,7 +7,8 @@
   "scripts": {
     "server": "nodemon -- exec babel-node server.js",
     "reload": "pm2 reload server --update-env",
-    "test": "jest"
+    "test": "jest",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

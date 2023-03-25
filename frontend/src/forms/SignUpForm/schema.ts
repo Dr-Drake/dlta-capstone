@@ -9,7 +9,7 @@ import * as yup from 'yup';
  * . represents any character except line break.
  * {.6,} represents minimum six in length.
  */
-let regex = new RegExp('^(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[!@#\$%\^&\*])(?=.{8,})');
+let regex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})');
 
 export const SignUpFormSchema = yup.object({
     email: yup.string().email().required(),
