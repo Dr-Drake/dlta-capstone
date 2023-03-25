@@ -2,14 +2,8 @@
   "name": "dlta-capstone",
   "version": "1.0.0",
   "description": "DLTA Capstone project.",
-  "type": "module",
   "scripts": {
     "test": "jest"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    }
   },
   "repository": {
     "type": "git",
