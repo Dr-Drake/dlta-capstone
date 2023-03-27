@@ -6,8 +6,7 @@
 
 <br/>
 
-![Screenshot from 2023-03-17 21-56-14](https://user-images.githubusercontent.com/90524466/226044140-1e74bd4a-0aa4-4b59-8980-65e3164f7ade.png)
-<br/>
+![Screenshot from 2023-03-27 18-37-38](https://user-images.githubusercontent.com/90524466/228007143-2897eef5-8ce9-4ec8-94f2-b8ef6bc8cd22.png)
 
 Additional description about the project and its features.
 
