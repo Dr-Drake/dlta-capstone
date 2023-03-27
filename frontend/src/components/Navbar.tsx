@@ -38,8 +38,12 @@ const Navbar: React.FC<any> = ({ children })=>{
         await signOut({ callbackUrl: '/login' })
     }
 
-    const toggleDrawer = ()=>{
-        drawer?.toggle();
+    const openDrawer = ()=>{
+        drawer?.show();
+    }
+
+    const hideDrawer = ()=>{
+        drawer?.hide();
     }
 
     const handleSearchChange: React.ChangeEventHandler<HTMLInputElement> = (e)=>{
@@ -68,7 +72,9 @@ const Navbar: React.FC<any> = ({ children })=>{
         </Link>
     )
     const drawerCloseButton = (
-        <button type="button" data-drawer-hide="hamburger" aria-controls="hamburger">
+        <button type="button"
+            onClick={hideDrawer}
+        >
             <GrClose/>
         </button>
     )
@@ -76,7 +82,7 @@ const Navbar: React.FC<any> = ({ children })=>{
     const mobileDrawer = (
         <div 
             ref={drawerRef}
-            id="hamburger" 
+            //id="hamburger" 
             className="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-80 dark:bg-gray-800" tabIndex={-1} aria-labelledby="drawer-label"
         >
             <div className='flex justify-between items-center'>
@@ -141,7 +147,7 @@ const Navbar: React.FC<any> = ({ children })=>{
                 data-drawer-show="hamburger" 
                 aria-controls="hamburger"
                 className='block lg:hidden'
-                onClick={toggleDrawer}
+                onClick={openDrawer}
             >
                 <GiHamburgerMenu size={25}/>
             </button>

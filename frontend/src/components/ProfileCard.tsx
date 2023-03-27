@@ -20,7 +20,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
     }
 
     return(
-        <div className="border rounded-xl border-borderGray px-3 py-5 w-full lg:w-[360px] flex sm:flex-col"
+        <div className="border rounded-xl border-borderGray px-3 py-5 w-full flex sm:flex-col"
             data-testid="profile-card"
         >
 
